@@ -53,27 +53,45 @@ If we look at the definition of a Zero-Knowledge Proof above, we can see:
   Because the colors are reshuffled in every run, the verifier can not make 
   any conclusions about the solution itself
 
-## History
-
 ## Key Concepts
 
-With conventional proofs it was always assumed, that the prover could act 
-malicious 
+Conventional proof systems make sure that the prover can not act malicious.
+Zero-Knowledge proof systems take this a step further and also make sure the 
+verifier can not act malicious.
+After a Zero-Knowledge proof the verifier (or an eavesdropper) is neither able 
+to prove that they posses the knowledge (because they don't) nor that the 
+initial prover possess the knowledge.
+In our example above, you would not get any information about how I solved the 
+graph-color problem, yet you would be convinced that I have a valid solution.
+Lets say you recorded the above procedure on camera, so you can later convince 
+your very skeptical friends that I know a valid solution.
+On the recording they would see how the two uncovered vertices are of 
+different color each time but that will not convince them (they are very 
+skeptical after all) since you and I could have on a the exact vertices to be 
+uncovered beforehand.[^nyt]
 
-The goal of a Zero-Knowledge proof is to proof the knowledge of something in 
-such a way, that the verifier (or an eavesdropper) will not be able to 
-convince a third party that they posses said knowledge. [^nyt]
-This concept has wide ranging consequences.
-You could for example proof that you are in possesion of a credit card number 
-without giving it away (limiting the risk of fraud uses).
-In the internet you can prove that you are a human being (as opposed ot a bot) 
-without giving any information about yourself.
-Or you can prove that a transaction on a blockchain is valid without revealing 
-any details about the transaction.
+Following this logic you would be able to prove that you know a password 
+without ever giving it to any potentially malicious other party or 
+eavesdropper,
+online you could prove that you are you to just one person and they would 
+not be able to prove that to anyone else
+and in the context of blockchain you could prove that a transaction is valid 
+without revealing any information about the transaction itself.
+
+### Interactive vs. Non-Interactive
+
+When first described by Goldwasser, Micali and Rackoff Zero-Knowledge proofs 
+were interactive, meaning the prover and verifier need to interact[^zk].
+Later Blum, Feldman, and Micali showed that a common random string shared 
+between the prover and the verifier is enough to achieve computational 
+zero-knowledge without requiring interaction[^ni-zk].
 
 
 [^nyt]:
 	[A New Approach to Protecting Secrets is Discovered](https://www.nytimes.com/1987/02/17/science/a-new-approach-to-protecting-secrets-is-discovered.html) by James Gleick; New York Times; Feb. 17, 1987
-
+[^zk]:
+	https://people.csail.mit.edu/silvio/Selected%20Scientific%20Papers/Proof%20Systems/The_Knowledge_Complexity_Of_Interactive_Proof_Systems.pdf
+[^ni-zk]:
+	
 [graph coloring]: https://en.wikipedia.org/wiki/Graph_coloring#Vertex_coloring
 [graph img]: https://upload.wikimedia.org/wikipedia/commons/c/c2/Triangulation_3-coloring.svg
