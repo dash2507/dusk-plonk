@@ -96,16 +96,40 @@ not be able to prove that to anyone else.
 And in the context of blockchain you could prove that a transaction is valid 
 without revealing any information about the transaction itself.
 
-## Zero-Knowledge and PLONK
+## Zero-Knowledge protocols
 
 When first described Zero-Knowledge proofs were interactive, meaning the 
 prover and verifier need to interact, like in our example above.
-Later it was discovered that a reference string shared between the prover and 
-the verifier is enough to achieve computational zero-knowledge without 
-requiring interaction.
+Later it was discovered that a shared reference string is enough to achieve 
+computational zero-knowledge without requiring an interaction between prover 
+and verifier.
 
-Over time different Zero-Knowledge protocols have been discovered. One of them 
-are the zk-SNARK (Succinct Non-interactive ARguments of Knowledge) protocols.
+Over time different Zero-Knowledge protocols have been discovered. They have 
+beautiful names like *STARK* (Scalable Transparent ARgument of Knowledge), 
+*BulletProof*, *SNARG* (Succinct Non-interactive ARGuments) and *SNARK* 
+(Succinct Non-interactive ARgument of Knowledge).  
+I will not explain the different protocols in detail here.
+Instead, I will just give a brief overview of what those fancy abbreviation 
+actually mean so you have a staring point for the next internet research 
+rabbit hole.
+
+- Scalable:  
+  Both prover and verrifier running times are scalable.
+- Transparent:  
+  Doesn't require a setup-phase which uses a non-public random parameter like 
+  the shared reference string mentioned above.
+- ARgument:  
+  Strictly mathematically speaking, many of the above protocols are no proofs 
+  but arguments. However in practice we can still think of them as a proofs.
+- Knowledge:  
+  The prover proofs that they themselves know the solution. In our above 
+  example that means that the prover doesn't prove that a solution exists 
+  but that they actually know the solution.
+- Succinct:  
+  The proofs are relatively small and easy to verify
+- Non-interactive:  
+  No interaction between prover and verifier is needed
+
 
 
 [graph coloring]: https://en.wikipedia.org/wiki/Graph_coloring#Vertex_coloring
