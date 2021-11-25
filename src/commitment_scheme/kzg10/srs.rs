@@ -13,12 +13,13 @@ use dusk_bls12_381::{G1Affine, G1Projective, G2Affine};
 use dusk_bytes::{DeserializableSlice, Serializable};
 use parity_scale_codec::{Decode, Encode};
 use rand_core::{CryptoRng, RngCore};
+use serde::{Deserialize, Serialize};
 
 /// The Public Parameters can also be referred to as the Structured Reference
 /// String (SRS). It is available to both the prover and verifier and allows the
 /// verifier to efficiently verify and make claims about polynomials up to and
 /// including a configured degree.
-#[derive(Debug, Clone, Encode, Decode)]
+#[derive(Debug, Clone, Encode, Decode, Serialize, Deserialize)]
 pub struct PublicParameters {
     /// Key used to generate proofs for composed circuits.
     pub(crate) commit_key: CommitKey,

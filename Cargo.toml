@@ -29,8 +29,9 @@ cfg-if = "1.0"
 # Dusk related deps for WASMI serde
 canonical = {version = "0.6", optional = true}
 canonical_derive = {version = "0.6", optional = true}
-# Parity deps
+# Pallet related deps
 parity-scale-codec = { version = "2.0", default-features = false, features = ["derive"] }
+serde = { versions = "1.0.130", features = ["derive"] }
 
 [dev-dependencies]
 criterion = "0.3"
