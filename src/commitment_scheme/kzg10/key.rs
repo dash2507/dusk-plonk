@@ -18,10 +18,11 @@ use dusk_bls12_381::{
 };
 use dusk_bytes::{DeserializableSlice, Serializable};
 use merlin::Transcript;
+use parity_scale_codec::{Decode, Encode};
 
 /// CommitKey is used to commit to a polynomial which is bounded by the
 /// max_degree.
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Encode, Decode)]
 pub struct CommitKey {
     /// Group elements of the form `{ \beta^i G }`, where `i` ranges from 0 to
     /// `degree`.
@@ -197,7 +198,7 @@ impl CommitKey {
 
 /// Opening Key is used to verify opening proofs made about a committed
 /// polynomial.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Encode, Decode)]
 pub struct OpeningKey {
     /// The generator of G1.
     pub(crate) g: G1Affine,
