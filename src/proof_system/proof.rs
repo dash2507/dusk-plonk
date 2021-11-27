@@ -13,6 +13,7 @@
 use super::linearisation_poly::ProofEvaluations;
 use crate::commitment_scheme::Commitment;
 use dusk_bytes::{DeserializableSlice, Serializable};
+use parity_scale_codec::{Decode, Encode};
 
 /// A Proof is a composition of `Commitment`s to the Witness, Permutation,
 /// Quotient, Shifted and Opening polynomials as well as the
@@ -24,7 +25,7 @@ use dusk_bytes::{DeserializableSlice, Serializable};
 /// [`Verifier`](super::Verifier) have in common succintly and without any
 /// capabilities of adquiring any kind of knowledge about the witness used to
 /// construct the Proof.
-#[derive(Debug, Eq, PartialEq, Clone, Default)]
+#[derive(Debug, Eq, PartialEq, Clone, Default, Decode, Encode)]
 pub struct Proof {
     /// Commitment to the witness polynomial for the left wires.
     pub(crate) a_comm: Commitment,

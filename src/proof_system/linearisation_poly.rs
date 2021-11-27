@@ -12,6 +12,8 @@ use crate::{
 
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable};
+use parity_scale_codec::{Decode, Encode};
+
 #[allow(dead_code)]
 /// Evaluations at points `z` or and `z * root of unity`
 pub(crate) struct Evaluations {
@@ -22,7 +24,7 @@ pub(crate) struct Evaluations {
 
 /// Subset of all of the evaluations. These evaluations
 /// are added to the [`Proof`](super::Proof).
-#[derive(Debug, Eq, PartialEq, Clone, Default)]
+#[derive(Debug, Eq, PartialEq, Clone, Default, Decode, Encode)]
 pub(crate) struct ProofEvaluations {
     // Evaluation of the witness polynomial for the left wire at `z`
     pub(crate) a_eval: BlsScalar,
