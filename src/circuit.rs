@@ -18,7 +18,7 @@ use dusk_bytes::{DeserializableSlice, Serializable, Write};
 use dusk_jubjub::{JubJubAffine, JubJubExtended, JubJubScalar};
 use parity_scale_codec::{Decode, Encode};
 
-#[derive(Default, Debug, Clone)]
+#[derive(Default, Debug, Clone, PartialEq, Decode, Encode)]
 #[cfg_attr(feature = "canon", derive(Canon))]
 /// Structure that represents a PLONK Circuit Public Input converted into it's
 /// &\[[`BlsScalar`]\] repr.
