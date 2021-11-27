@@ -199,7 +199,7 @@ impl CommitKey {
 
 /// Opening Key is used to verify opening proofs made about a committed
 /// polynomial.
-#[derive(Clone, Debug, Encode, Decode, Serialize, Deserialize)]
+#[derive(Clone, Debug, Encode, Decode, Serialize, Deserialize, PartialEq)]
 pub struct OpeningKey {
     /// The generator of G1.
     pub(crate) g: G1Affine,

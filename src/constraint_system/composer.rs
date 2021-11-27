@@ -53,7 +53,7 @@ use hashbrown::HashMap;
 #[derive(Debug)]
 pub struct TurboComposer {
     /// Number of arithmetic gates in the circuit
-    pub(crate) n: usize,
+    pub(crate) n: u32,
 
     // Constraint vectors
     /// Multiplier selector
@@ -83,7 +83,7 @@ pub struct TurboComposer {
 
     /// Sparse representation of the Public Inputs linking the positions of the
     /// non-zero ones to it's actual values.
-    pub(crate) public_inputs_sparse_store: BTreeMap<usize, BlsScalar>,
+    pub(crate) public_inputs_sparse_store: BTreeMap<u32, BlsScalar>,
 
     // Witness vectors
     /// Left wire witness vector.
@@ -116,7 +116,7 @@ impl TurboComposer {
     }
 
     /// Return the number of gates in the circuit
-    pub const fn gates(&self) -> usize {
+    pub const fn gates(&self) -> u32 {
         self.n
     }
 
@@ -135,11 +135,11 @@ impl TurboComposer {
     /// Constructs a dense vector of the Public Inputs from the positions and
     /// the sparse vector that contains the values.
     pub(crate) fn to_dense_public_inputs(&self) -> Vec<BlsScalar> {
-        let mut pi = vec![BlsScalar::zero(); self.n];
+        let mut pi = vec![BlsScalar::zero(); self.n as usize];
         self.public_inputs_sparse_store
             .iter()
             .for_each(|(pos, value)| {
-                pi[*pos] = *value;
+                pi[*pos as usize] = *value;
             });
         pi
     }
@@ -148,11 +148,11 @@ impl TurboComposer {
     /// instance.
     // TODO: Find a more performant solution which can return a ref to a Vec or
     // Iterator.
-    pub fn public_input_indexes(&self) -> Vec<usize> {
+    pub fn public_input_indexes(&self) -> Vec<u32> {
         self.public_inputs_sparse_store
             .keys()
             .copied()
-            .collect::<Vec<usize>>()
+            .collect::<Vec<u32>>()
     }
 }
 
@@ -290,10 +290,10 @@ impl TurboComposer {
         self.q_lookup.push(q_lookup);
 
         if s.has_public_input() {
-            self.public_inputs_sparse_store.insert(self.n, pi);
+            self.public_inputs_sparse_store.insert(self.n as u32, pi);
         }
 
-        self.perm.add_variables_to_map(a, b, o, d, self.n);
+        self.perm.add_variables_to_map(a, b, o, d, self.n as usize);
 
         self.n += 1;
     }
@@ -494,7 +494,7 @@ impl TurboComposer {
             var_seven,
             var_min_twenty,
             var_one,
-            self.n,
+            self.n as usize,
         );
         self.n += 1;
         //Add another dummy constraint so that we do not get the identity
@@ -520,7 +520,7 @@ impl TurboComposer {
             var_six,
             var_seven,
             Self::constant_zero(),
-            self.n,
+            self.n as usize,
         );
 
         // Add dummy rows to lookup table
@@ -767,7 +767,7 @@ impl TurboComposer {
             self.public_inputs_sparse_store.insert(self.n, pi);
         }
 
-        self.perm.add_variables_to_map(a, b, c, d, self.n);
+        self.perm.add_variables_to_map(a, b, c, d, self.n as usize);
 
         self.n += 1;
 

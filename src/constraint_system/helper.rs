@@ -60,7 +60,7 @@ pub(crate) fn gadget_tester(
 
         // Commit Key
         let (ck, _) = public_parameters
-            .trim(2 * prover.cs.gates().next_power_of_two())?;
+            .trim(2 * (prover.cs.gates() as usize).next_power_of_two())?;
 
         // Preprocess circuit
         prover.preprocess(&ck)?;
@@ -84,8 +84,8 @@ pub(crate) fn gadget_tester(
     gadget(&mut verifier.composer_mut());
 
     // Compute Commit and Verifier Key
-    let (ck, vk) =
-        public_parameters.trim(verifier.cs.gates().next_power_of_two())?;
+    let (ck, vk) = public_parameters
+        .trim((verifier.cs.gates() as usize).next_power_of_two())?;
 
     // Preprocess circuit
     verifier.preprocess(&ck)?;
@@ -120,7 +120,7 @@ pub(crate) fn gadget_plonkup_tester(
 
         // Commit Key
         let (ck, _) = public_parameters
-            .trim(2 * prover.cs.gates().next_power_of_two())?;
+            .trim(2 * (prover.cs.gates() as usize).next_power_of_two())?;
 
         // Preprocess circuit
         prover.preprocess(&ck)?;
@@ -147,8 +147,8 @@ pub(crate) fn gadget_plonkup_tester(
     gadget(&mut verifier.composer_mut());
 
     // Compute Commit and Verifier Key
-    let (ck, vk) =
-        public_parameters.trim(verifier.cs.gates().next_power_of_two())?;
+    let (ck, vk) = public_parameters
+        .trim((verifier.cs.gates() as usize).next_power_of_two())?;
 
     // Preprocess circuit
     verifier.preprocess(&ck)?;

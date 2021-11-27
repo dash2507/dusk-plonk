@@ -67,7 +67,7 @@ impl TurboComposer {
             wnaf_round.acc_y,
             wnaf_round.xy_alpha,
             wnaf_round.accumulated_bit,
-            self.n,
+            self.n as usize,
         );
 
         self.n += 1;

@@ -5,8 +5,9 @@
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
 use crate::commitment_scheme::Commitment;
+use parity_scale_codec::{Decode, Encode};
 
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Decode, Encode)]
 pub(crate) struct VerifierKey {
     pub(crate) q_range: Commitment,
 }

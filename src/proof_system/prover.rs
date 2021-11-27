@@ -78,7 +78,7 @@ impl Prover {
 
     /// Returns the number of gates in the circuit thet the `Prover` actually
     /// stores inside.
-    pub const fn gates(&self) -> usize {
+    pub const fn gates(&self) -> u32 {
         self.cs.gates()
     }
 
@@ -159,7 +159,7 @@ impl Prover {
         // make sure the domain is big enough to handle the circuit as well as
         // the lookup table
         let domain = EvaluationDomain::new(core::cmp::max(
-            self.cs.gates(),
+            self.cs.gates() as usize,
             self.cs.lookup_table.0.len(),
         ))?;
 

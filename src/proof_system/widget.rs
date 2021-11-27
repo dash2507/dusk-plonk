@@ -6,6 +6,7 @@
 
 use crate::commitment_scheme::Commitment;
 use dusk_bytes::{DeserializableSlice, Serializable};
+use parity_scale_codec::{Decode, Encode};
 
 pub mod arithmetic;
 pub mod ecc;
@@ -18,10 +19,10 @@ pub mod range;
 ///
 /// This structure is used by the Verifier in order to verify a
 /// [`Proof`](super::Proof).
-#[derive(Debug, PartialEq, Eq, Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone, Decode, Encode)]
 pub struct VerifierKey {
     /// Circuit size (not padded to a power of two).
-    pub(crate) n: usize,
+    pub(crate) n: u32,
     /// VerifierKey for arithmetic gates
     pub(crate) arithmetic: arithmetic::VerifierKey,
     /// VerifierKey for logic gates
@@ -103,7 +104,7 @@ impl Serializable<{ 20 * Commitment::SIZE + u64::SIZE }> for VerifierKey {
 
 impl VerifierKey {
     /// Returns the Circuit size padded to the next power of two.
-    pub const fn padded_gates(&self) -> usize {
+    pub const fn padded_gates(&self) -> u32 {
         self.n.next_power_of_two()
     }
 
@@ -168,6 +169,8 @@ impl VerifierKey {
             out_sigma,
             fourth_sigma,
         };
+
+        let n = n as u32;
 
         VerifierKey {
             n,
@@ -773,7 +776,7 @@ mod test {
         use crate::commitment_scheme::Commitment;
         use dusk_bls12_381::G1Affine;
 
-        let n = 2usize.pow(5);
+        let n = 2usize.pow(5) as u32;
 
         let q_m = Commitment(G1Affine::generator());
         let q_l = Commitment(G1Affine::generator());

@@ -73,15 +73,17 @@ impl TurboComposer {
         // We increase the gate idx and assign w_4, w_l and w_r to `zero`.
         // Now we can add the first row as: `| 0 | 0 | -- | 0 |`.
         // Note that `w_1` will be set on the first loop iteration.
-        self.perm
-            .add_variable_to_map(Self::constant_zero(), WireData::Left(self.n));
         self.perm.add_variable_to_map(
             Self::constant_zero(),
-            WireData::Right(self.n),
+            WireData::Left(self.n as usize),
         );
         self.perm.add_variable_to_map(
             Self::constant_zero(),
-            WireData::Fourth(self.n),
+            WireData::Right(self.n as usize),
+        );
+        self.perm.add_variable_to_map(
+            Self::constant_zero(),
+            WireData::Fourth(self.n as usize),
         );
         self.w_l.push(Self::constant_zero());
         self.w_r.push(Self::constant_zero());
@@ -201,13 +203,16 @@ impl TurboComposer {
             // Also note that here we're setting left, right and fourth
             // variables to the actual gate, meanwhile we set out to
             // the previous gate.
-            self.perm.add_variable_to_map(var_a, WireData::Left(self.n));
             self.perm
-                .add_variable_to_map(var_b, WireData::Right(self.n));
+                .add_variable_to_map(var_a, WireData::Left(self.n as usize));
             self.perm
-                .add_variable_to_map(var_4, WireData::Fourth(self.n));
+                .add_variable_to_map(var_b, WireData::Right(self.n as usize));
             self.perm
-                .add_variable_to_map(var_c, WireData::Output(self.n - 1));
+                .add_variable_to_map(var_4, WireData::Fourth(self.n as usize));
+            self.perm.add_variable_to_map(
+                var_c,
+                WireData::Output(self.n as usize - 1),
+            );
             // Push the variables to it's actual wire vector storage
             self.w_l.push(var_a);
             self.w_r.push(var_b);
@@ -224,7 +229,7 @@ impl TurboComposer {
         // | an  | bn  | --- | cn  |
         self.perm.add_variable_to_map(
             Self::constant_zero(),
-            WireData::Output(self.n - 1),
+            WireData::Output(self.n as usize - 1),
         );
         self.w_o.push(Self::constant_zero());
 
@@ -287,13 +292,13 @@ impl TurboComposer {
             self.witnesses[&a]
                 & (BlsScalar::from(2u64).pow(&[(num_bits) as u64, 0, 0, 0])
                     - BlsScalar::one()),
-            self.witnesses[&self.w_l[self.n - 1]]
+            self.witnesses[&self.w_l[(self.n - 1) as usize]]
         );
         assert_eq!(
             self.witnesses[&b]
                 & (BlsScalar::from(2u64).pow(&[(num_bits) as u64, 0, 0, 0])
                     - BlsScalar::one()),
-            self.witnesses[&self.w_r[self.n - 1]]
+            self.witnesses[&self.w_r[(self.n - 1) as usize]]
         );
 
         // Once the inputs are checked against the accumulated additions,

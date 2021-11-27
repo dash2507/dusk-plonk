@@ -167,7 +167,7 @@ pub(crate) mod alloc {
             opening_key: &OpeningKey,
             pub_inputs: &[BlsScalar],
         ) -> Result<(), Error> {
-            let domain = EvaluationDomain::new(verifier_key.n)?;
+            let domain = EvaluationDomain::new(verifier_key.n as usize)?;
 
             // Subgroup checks are done when the proof is deserialised.
 

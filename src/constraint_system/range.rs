@@ -28,24 +28,24 @@ impl TurboComposer {
             |composer: &mut TurboComposer, i: usize, witness: Witness| {
                 // Since four quads can fit into one gate, the gate index does
                 // not change for every four wires
-                let gate_index = composer.gates() + (i / 4);
+                let gate_index = composer.gates() as usize + (i / 4);
 
                 let wire_data = match i % 4 {
                     0 => {
                         composer.w_4.push(witness);
-                        WireData::Fourth(gate_index)
+                        WireData::Fourth(gate_index as usize)
                     }
                     1 => {
                         composer.w_o.push(witness);
-                        WireData::Output(gate_index)
+                        WireData::Output(gate_index as usize)
                     }
                     2 => {
                         composer.w_r.push(witness);
-                        WireData::Right(gate_index)
+                        WireData::Right(gate_index as usize)
                     }
                     3 => {
                         composer.w_l.push(witness);
-                        WireData::Left(gate_index)
+                        WireData::Left(gate_index as usize)
                     }
                     _ => unreachable!(),
                 };
@@ -175,7 +175,7 @@ impl TurboComposer {
         self.q_range.extend(ones.iter());
         self.q_logic.extend(zeros.iter());
         self.q_lookup.extend(zeros.iter());
-        self.n += used_gates;
+        self.n += used_gates as u32;
 
         // As mentioned above, we must switch off the range constraint for the
         // last gate Remember; it will contain one quad in the fourth

@@ -16,6 +16,7 @@ use canonical_derive::Canon;
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable, Write};
 use dusk_jubjub::{JubJubAffine, JubJubExtended, JubJubScalar};
+use parity_scale_codec::{Decode, Encode};
 
 #[derive(Default, Debug, Clone)]
 #[cfg_attr(feature = "canon", derive(Canon))]
@@ -47,14 +48,14 @@ impl From<JubJubExtended> for PublicInputValue {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Decode, Encode)]
 /// Collection of structs/objects that the Verifier will use in order to
 /// de/serialize data needed for Circuit proof verification.
 /// This structure can be seen as a link between the [`Circuit`] public input
 /// positions and the [`VerifierKey`] that the Verifier needs to use.
 pub struct VerifierData {
     key: VerifierKey,
-    public_inputs_indexes: Vec<usize>,
+    public_inputs_indexes: Vec<u32>,
 }
 
 impl VerifierData {
@@ -62,7 +63,7 @@ impl VerifierData {
     /// input positions of the circuit that it represents.
     pub const fn new(
         key: VerifierKey,
-        public_inputs_indexes: Vec<usize>,
+        public_inputs_indexes: Vec<u32>,
     ) -> Self {
         Self {
             key,
@@ -76,7 +77,7 @@ impl VerifierData {
     }
 
     /// Returns a reference to the contained Public Input positions.
-    pub fn public_inputs_indexes(&self) -> &[usize] {
+    pub fn public_inputs_indexes(&self) -> &[u32] {
         &self.public_inputs_indexes
     }
 
@@ -109,7 +110,7 @@ impl VerifierData {
 
         let mut public_inputs_indexes = vec![];
         for _ in 0..pos_num {
-            public_inputs_indexes.push(u32::from_reader(&mut buf)? as usize);
+            public_inputs_indexes.push(u32::from_reader(&mut buf)?);
         }
 
         Ok(Self {
@@ -321,7 +322,7 @@ where
         let gates = verifier_data.key().padded_gates();
         let pi_indexes = verifier_data.public_inputs_indexes();
 
-        let mut dense_pi = vec![BlsScalar::zero(); gates];
+        let mut dense_pi = vec![BlsScalar::zero(); gates as usize];
 
         public_inputs
             .iter()
@@ -329,7 +330,7 @@ where
             .flatten()
             .zip(pi_indexes.iter().cloned())
             .for_each(|(value, pos)| {
-                dense_pi[pos] = -value;
+                dense_pi[pos as usize] = -value;
             });
 
         let mut verifier = Verifier::new(transcript_init);

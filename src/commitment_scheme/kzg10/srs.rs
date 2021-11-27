@@ -19,7 +19,7 @@ use serde::{Deserialize, Serialize};
 /// String (SRS). It is available to both the prover and verifier and allows the
 /// verifier to efficiently verify and make claims about polynomials up to and
 /// including a configured degree.
-#[derive(Debug, Clone, Encode, Decode, Serialize, Deserialize)]
+#[derive(Debug, Clone, Encode, Decode, Serialize, Deserialize, PartialEq)]
 pub struct PublicParameters {
     /// Key used to generate proofs for composed circuits.
     pub(crate) commit_key: CommitKey,

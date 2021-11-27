@@ -53,7 +53,7 @@ impl Verifier {
     }
 
     /// Returns the number of gates in the circuit.
-    pub const fn gates(&self) -> usize {
+    pub const fn gates(&self) -> u32 {
         self.cs.gates()
     }
 

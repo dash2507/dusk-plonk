@@ -7,8 +7,9 @@
 //! Module containing the representation of a Commitment to a Polynomial.
 use dusk_bls12_381::{G1Affine, G1Projective};
 use dusk_bytes::{DeserializableSlice, Serializable};
+use parity_scale_codec::{Decode, Encode};
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Decode, Encode)]
 /// Holds a commitment to a polynomial in a form of a [`G1Affine`]-bls12_381
 /// point.
 pub(crate) struct Commitment(

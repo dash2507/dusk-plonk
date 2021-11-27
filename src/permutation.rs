@@ -864,7 +864,7 @@ mod test {
             Constraint::new().mult(1).output(-two).a(x3).b(x4).o(x2);
         cs.append_gate(constraint);
 
-        let domain = EvaluationDomain::new(cs.gates()).unwrap();
+        let domain = EvaluationDomain::new(cs.gates() as usize).unwrap();
         let pad = vec![BlsScalar::zero(); domain.size() - cs.w_l.len()];
         let mut w_l_scalar: Vec<BlsScalar> =
             cs.w_l.iter().map(|v| cs.witnesses[v]).collect();

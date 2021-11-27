@@ -69,7 +69,7 @@ impl TurboComposer {
         self.w_o.extend(zeroes_var.iter());
         self.w_4.extend(zeroes_var.iter());
 
-        self.n += diff;
+        self.n += diff as u32;
     }
 
     /// Checks that all of the wires of the composer have the same
@@ -325,15 +325,16 @@ impl TurboComposer {
     > {
         // FIXME total_size requires documentation
         // https://github.com/dusk-network/plonk/issues/580
-        let total_size = core::cmp::max(self.n, self.lookup_table.0.len());
+        let total_size =
+            core::cmp::max(self.n, self.lookup_table.0.len() as u32);
 
-        let domain = EvaluationDomain::new(total_size)?;
+        let domain = EvaluationDomain::new(total_size as usize)?;
 
         // Check that the length of the wires is consistent.
         self.check_poly_same_len()?;
 
         // 1. Pad circuit to a power of two
-        self.pad(domain.size as usize - self.n);
+        self.pad(domain.size as usize - self.n as usize);
 
         let q_m_poly =
             Polynomial::from_coefficients_slice(&domain.ifft(&self.q_m));
@@ -364,7 +365,8 @@ impl TurboComposer {
 
         // 2. Compute the sigma polynomials
         let [left_sigma_poly, right_sigma_poly, out_sigma_poly, fourth_sigma_poly] =
-            self.perm.compute_sigma_polynomials(self.n, &domain);
+            self.perm
+                .compute_sigma_polynomials(self.n as usize, &domain);
 
         let q_m_poly_commit = commit_key.commit(&q_m_poly).unwrap_or_default();
         let q_l_poly_commit = commit_key.commit(&q_l_poly).unwrap_or_default();
@@ -498,23 +500,23 @@ mod test {
 
         // Pad the circuit to next power of two
         let next_pow_2 = composer.n.next_power_of_two() as u64;
-        composer.pad(next_pow_2 as usize - composer.n);
+        composer.pad(next_pow_2 as usize - composer.n as usize);
 
         let size = composer.n;
         assert!(size.is_power_of_two());
-        assert_eq!(composer.q_m.len(), size);
-        assert_eq!(composer.q_l.len(), size);
-        assert_eq!(composer.q_o.len(), size);
-        assert_eq!(composer.q_r.len(), size);
-        assert_eq!(composer.q_c.len(), size);
-        assert_eq!(composer.q_arith.len(), size);
-        assert_eq!(composer.q_range.len(), size);
-        assert_eq!(composer.q_logic.len(), size);
-        assert_eq!(composer.q_fixed_group_add.len(), size);
-        assert_eq!(composer.q_variable_group_add.len(), size);
-        assert_eq!(composer.q_lookup.len(), size);
-        assert_eq!(composer.w_l.len(), size);
-        assert_eq!(composer.w_r.len(), size);
-        assert_eq!(composer.w_o.len(), size);
+        assert_eq!(composer.q_m.len(), size as usize);
+        assert_eq!(composer.q_l.len(), size as usize);
+        assert_eq!(composer.q_o.len(), size as usize);
+        assert_eq!(composer.q_r.len(), size as usize);
+        assert_eq!(composer.q_c.len(), size as usize);
+        assert_eq!(composer.q_arith.len(), size as usize);
+        assert_eq!(composer.q_range.len(), size as usize);
+        assert_eq!(composer.q_logic.len(), size as usize);
+        assert_eq!(composer.q_fixed_group_add.len(), size as usize);
+        assert_eq!(composer.q_variable_group_add.len(), size as usize);
+        assert_eq!(composer.q_lookup.len(), size as usize);
+        assert_eq!(composer.w_l.len(), size as usize);
+        assert_eq!(composer.w_r.len(), size as usize);
+        assert_eq!(composer.w_o.len(), size as usize);
     }
 }
