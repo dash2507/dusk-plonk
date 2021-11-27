@@ -20,7 +20,7 @@ exclude = [
 merlin = {version = "3.0", default-features = false}
 rand_core = {version="0.6", default-features=false}
 dusk-bytes = "0.1"
-dusk-bls12_381 = {path = "../bls12_381"}
+dusk-bls12_381 = {git = "https://github.com/PlasmNetwork/bls12_381", rev = "177a0911b050316984197d2f2bea9f0c9799e214"}
 dusk-jubjub = {path = "../jubjub"}
 itertools = {version = "0.9", default-features = false}
 hashbrown = {version = "0.9", default-features=false, features = ["ahash"]}
