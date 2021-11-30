@@ -26,11 +26,11 @@ pub(crate) mod alloc {
     use super::*;
     use crate::transcript::TranscriptProtocol;
     use crate::util::powers_of;
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::G1Projective;
     use merlin::Transcript;
     #[cfg(feature = "std")]
     use rayon::prelude::*;
+    use sp_std::vec::Vec;
 
     /// Proof that multiple polynomials were correctly evaluated at a point `z`,
     /// each producing their respective evaluated points p_i(z).

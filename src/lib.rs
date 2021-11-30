@@ -55,24 +55,13 @@
 #![deny(missing_docs)]
 #![cfg_attr(not(feature = "std"), no_std)]
 
-cfg_if::cfg_if!(
-if #[cfg(feature = "alloc")] {
-    /// `macro_use` will declare `vec!`. However, if `libstd` is present, then this is declared in
-    /// the prelude and there will be a conflicting implementation.
-    ///
-    /// We might have `no_std + alloc` or `std + alloc`, but `macro_use` should be used only for
-    /// `no_std`
-    #[cfg_attr(not(feature = "std"), macro_use)]
-    extern crate alloc;
+mod bit_iterator;
+mod permutation;
+mod util;
 
-    mod bit_iterator;
-    mod permutation;
-    mod util;
-
-    pub mod circuit;
-    pub mod constraint_system;
-    pub mod plonkup;
-});
+pub mod circuit;
+pub mod constraint_system;
+pub mod plonkup;
 
 mod fft;
 mod transcript;

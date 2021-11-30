@@ -9,10 +9,10 @@ use crate::{
     fft::{EvaluationDomain, Polynomial},
     proof_system::ProverKey,
 };
-use alloc::vec::Vec;
 use dusk_bls12_381::BlsScalar;
 #[cfg(feature = "std")]
 use rayon::prelude::*;
+use sp_std::vec::Vec;
 
 /// Computes the Quotient [`Polynomial`] given the [`EvaluationDomain`], a
 /// [`ProverKey`] and some other info.

@@ -8,10 +8,10 @@ use crate::constraint_system::ecc::curve_addition::fixed_base_gate::WnafRound;
 use crate::constraint_system::{
     Constraint, TurboComposer, Witness, WitnessPoint,
 };
-use alloc::vec::Vec;
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::Serializable;
 use dusk_jubjub::{JubJubAffine, JubJubExtended, JubJubScalar};
+use sp_std::vec::Vec;
 
 fn compute_wnaf_point_multiples(
     generator: JubJubExtended,

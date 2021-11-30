@@ -21,10 +21,10 @@
 use crate::constraint_system::{Constraint, Selector, WiredWitness, Witness};
 use crate::permutation::Permutation;
 use crate::plonkup::LookupTable;
-use alloc::collections::BTreeMap;
-use alloc::vec::Vec;
 use dusk_bls12_381::BlsScalar;
 use hashbrown::HashMap;
+use sp_std::collections::btree_map::BTreeMap;
+use sp_std::vec::Vec;
 
 /// The TurboComposer is the circuit-builder tool that the `dusk-plonk`
 /// repository provides so that circuit descriptions can be written, stored and

@@ -7,9 +7,9 @@
 use crate::bit_iterator::*;
 use crate::constraint_system::TurboComposer;
 use crate::constraint_system::{WireData, Witness};
-use alloc::vec::Vec;
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::Serializable;
+use sp_std::vec::Vec;
 
 impl TurboComposer {
     /// Adds a range-constraint gate that checks and constrains a

@@ -10,13 +10,13 @@ use crate::commitment_scheme::PublicParameters;
 use crate::constraint_system::TurboComposer;
 use crate::error::Error;
 use crate::proof_system::{Proof, Prover, ProverKey, Verifier, VerifierKey};
-use alloc::vec::Vec;
 #[cfg(feature = "canon")]
 use canonical_derive::Canon;
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable, Write};
 use dusk_jubjub::{JubJubAffine, JubJubExtended, JubJubScalar};
 use parity_scale_codec::{Decode, Encode};
+use sp_std::vec::Vec;
 
 #[derive(Default, Debug, Clone, PartialEq, Decode, Encode)]
 #[cfg_attr(feature = "canon", derive(Canon))]

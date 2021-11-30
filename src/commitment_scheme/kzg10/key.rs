@@ -11,7 +11,6 @@ use super::{proof::Proof, Commitment};
 use crate::{
     error::Error, fft::Polynomial, transcript::TranscriptProtocol, util,
 };
-use alloc::vec::Vec;
 use dusk_bls12_381::{
     multiscalar_mul::msm_variable_base, BlsScalar, G1Affine, G1Projective,
     G2Affine, G2Prepared,
@@ -20,6 +19,7 @@ use dusk_bytes::{DeserializableSlice, Serializable};
 use merlin::Transcript;
 use parity_scale_codec::{Decode, Encode};
 use serde::{Deserialize, Serialize};
+use sp_std::vec::Vec;
 
 /// CommitKey is used to commit to a polynomial which is bounded by the
 /// max_degree.

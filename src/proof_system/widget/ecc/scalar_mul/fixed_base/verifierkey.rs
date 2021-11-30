@@ -21,9 +21,9 @@ mod alloc {
     use crate::proof_system::widget::ecc::scalar_mul::fixed_base::proverkey::{
         check_bit_consistency, extract_bit,
     };
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::{BlsScalar, G1Affine};
     use dusk_jubjub::EDWARDS_D;
+    use sp_std::vec::Vec;
 
     impl VerifierKey {
         pub(crate) fn compute_linearisation_commitment(

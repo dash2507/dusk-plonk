@@ -61,9 +61,9 @@ bit_iterator!(u8, BitIterator8);
 #[cfg(test)]
 mod test {
     use super::*;
-    use alloc::vec::Vec;
     use dusk_bls12_381::BlsScalar;
     use dusk_bytes::Serializable;
+    use sp_std::vec::Vec;
 
     #[test]
     fn test_bit_iterator8() {

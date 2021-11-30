@@ -6,11 +6,11 @@
 
 use crate::constraint_system::{WireData, Witness};
 use crate::fft::{EvaluationDomain, Polynomial};
-use alloc::vec::Vec;
 use constants::{K1, K2, K3};
 use dusk_bls12_381::BlsScalar;
 use hashbrown::HashMap;
 use itertools::izip;
+use sp_std::vec::Vec;
 
 pub(crate) mod constants;
 

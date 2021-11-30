@@ -64,8 +64,8 @@ impl Serializable<{ 7 * Commitment::SIZE }> for VerifierKey {
 mod alloc {
     use super::*;
     use crate::proof_system::linearisation_poly::ProofEvaluations;
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::{BlsScalar, G1Affine};
+    use sp_std::vec::Vec;
 
     impl VerifierKey {
         pub(crate) fn compute_linearisation_commitment(

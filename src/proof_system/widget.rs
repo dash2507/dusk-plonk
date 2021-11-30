@@ -194,9 +194,9 @@ pub(crate) mod alloc {
         fft::{EvaluationDomain, Evaluations, Polynomial},
         transcript::TranscriptProtocol,
     };
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::BlsScalar;
     use merlin::Transcript;
+    use sp_std::vec::Vec;
 
     impl VerifierKey {
         /// Adds the circuit description to the transcript
@@ -648,9 +648,9 @@ mod test {
     use super::*;
     use crate::fft::{EvaluationDomain, Evaluations, Polynomial};
     use crate::plonkup::MultiSet;
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::BlsScalar;
     use rand_core::OsRng;
+    use sp_std::vec::Vec;
 
     fn rand_poly_eval(n: usize) -> (Polynomial, Evaluations) {
         let polynomial = Polynomial::rand(n, &mut OsRng);

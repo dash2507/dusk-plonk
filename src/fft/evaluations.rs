@@ -9,12 +9,12 @@
 use super::domain::EvaluationDomain;
 use super::polynomial::Polynomial;
 use crate::error::Error;
-use alloc::vec::Vec;
 use core::ops::{
     Add, AddAssign, DivAssign, Index, Mul, MulAssign, Sub, SubAssign,
 };
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable};
+use sp_std::vec::Vec;
 
 /// Stores a polynomial in evaluation form.
 #[derive(PartialEq, Eq, Debug, Clone)]

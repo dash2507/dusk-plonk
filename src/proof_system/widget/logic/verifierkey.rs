@@ -18,8 +18,8 @@ mod alloc {
     use super::*;
     use crate::proof_system::linearisation_poly::ProofEvaluations;
     use crate::proof_system::widget::logic::proverkey::{delta, delta_xor_and};
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::{BlsScalar, G1Affine};
+    use sp_std::vec::Vec;
 
     impl VerifierKey {
         pub(crate) fn compute_linearisation_commitment(

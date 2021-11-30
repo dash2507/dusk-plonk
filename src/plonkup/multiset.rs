@@ -6,10 +6,10 @@
 
 use crate::error::Error;
 use crate::fft::{EvaluationDomain, Polynomial};
-use alloc::vec::Vec;
 use core::ops::{Add, Mul};
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable};
+use sp_std::vec::Vec;
 
 /// MultiSet is struct containing vectors of scalars, which
 /// individually represents either a wire value or an index

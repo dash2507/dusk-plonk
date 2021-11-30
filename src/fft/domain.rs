@@ -88,11 +88,11 @@ pub(crate) mod alloc {
     use super::*;
     use crate::error::Error;
     use crate::fft::Evaluations;
-    use ::alloc::vec::Vec;
     use core::ops::MulAssign;
     use dusk_bls12_381::{GENERATOR, ROOT_OF_UNITY, TWO_ADACITY};
     #[cfg(feature = "std")]
     use rayon::prelude::*;
+    use sp_std::vec::Vec;
 
     impl EvaluationDomain {
         /// Construct a domain that is large enough for evaluations of a

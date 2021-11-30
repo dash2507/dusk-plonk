@@ -151,13 +151,13 @@ pub(crate) mod alloc {
         transcript::TranscriptProtocol,
         util::batch_inversion,
     };
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::{
         multiscalar_mul::msm_variable_base, BlsScalar, G1Affine,
     };
     use merlin::Transcript;
     #[cfg(feature = "std")]
     use rayon::prelude::*;
+    use sp_std::vec::Vec;
 
     impl Proof {
         /// Performs the verification of a [`Proof`] returning a boolean result.

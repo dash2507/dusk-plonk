@@ -20,8 +20,8 @@ mod alloc {
     use super::*;
     use crate::permutation::constants::{K1, K2, K3};
     use crate::proof_system::linearisation_poly::ProofEvaluations;
-    use ::alloc::vec::Vec;
     use dusk_bls12_381::{BlsScalar, G1Affine};
+    use sp_std::vec::Vec;
 
     impl VerifierKey {
         pub(crate) fn compute_linearisation_commitment(

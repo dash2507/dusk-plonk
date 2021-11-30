@@ -4,11 +4,11 @@
 //
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
-use alloc::vec::Vec;
 use dusk_bls12_381::{
     BlsScalar, G1Affine, G1Projective, G2Affine, G2Projective,
 };
 use rand_core::{CryptoRng, RngCore};
+use sp_std::vec::Vec;
 
 /// Returns a vector of BlsScalars of increasing powers of x from x^0 to x^d.
 pub(crate) fn powers_of(
