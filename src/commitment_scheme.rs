@@ -18,8 +18,6 @@ mod kzg10;
 
 pub(crate) use kzg10::Commitment;
 
-#[cfg(feature = "alloc")]
 pub(crate) use kzg10::AggregateProof;
 
-#[cfg(feature = "alloc")]
 pub use kzg10::{CommitKey, OpeningKey, PublicParameters};

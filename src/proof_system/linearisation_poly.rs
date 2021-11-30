@@ -4,7 +4,6 @@
 //
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
-#[cfg(feature = "alloc")]
 use crate::{
     fft::{EvaluationDomain, Polynomial},
     proof_system::ProverKey,
@@ -185,8 +184,6 @@ impl Serializable<{ 24 * BlsScalar::SIZE }> for ProofEvaluations {
     }
 }
 
-#[cfg(feature = "alloc")]
-
 /// Compute the linearisation polynomial.
 // TODO: Improve the method signature
 #[allow(clippy::type_complexity)]
@@ -347,7 +344,6 @@ pub(crate) fn compute(
     )
 }
 
-#[cfg(feature = "alloc")]
 fn compute_circuit_satisfiability(
     (
         range_separation_challenge,

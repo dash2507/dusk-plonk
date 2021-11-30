@@ -4,20 +4,16 @@
 //
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
-#[cfg(feature = "alloc")]
 mod proverkey;
 mod verifierkey;
 
-#[cfg(feature = "alloc")]
 pub use proverkey::ProverKey;
 pub use verifierkey::VerifierKey;
 
 // Common functionality across both the ProverKey and VerifierKey is
 // enacted below
-#[cfg(feature = "alloc")]
 use dusk_bls12_381::BlsScalar;
 
-#[cfg(feature = "alloc")]
 fn compress(
     w_l: BlsScalar,
     w_r: BlsScalar,

@@ -10,19 +10,15 @@ pub(crate) mod linearisation_poly;
 pub(crate) mod proof;
 pub(crate) mod widget;
 
-cfg_if::cfg_if!(
-    if #[cfg(feature = "alloc")] {
-        mod preprocess;
+mod preprocess;
 
-        pub(crate) mod quotient_poly;
-        pub(crate) mod prover;
-        pub(crate) mod verifier;
+pub(crate) mod prover;
+pub(crate) mod quotient_poly;
+pub(crate) mod verifier;
 
-        pub use prover::Prover;
-        pub use verifier::Verifier;
-        pub use widget::alloc::ProverKey;
-    }
-);
+pub use prover::Prover;
+pub use verifier::Verifier;
+pub use widget::ProverKey;
 
 pub use proof::Proof;
 pub use widget::VerifierKey;

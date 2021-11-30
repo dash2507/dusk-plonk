@@ -4,9 +4,7 @@
 //
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
-#[cfg(feature = "alloc")]
-pub(crate) mod proverkey;
-#[cfg(feature = "alloc")]
+mod proverkey;
 pub(crate) use proverkey::ProverKey;
 
 mod verifierkey;

@@ -50,7 +50,6 @@ std = [
     "dusk-jubjub/default",
     "itertools/default",
     "hashbrown/default",
-    "alloc",
     "rayon"
 ]
 alloc = ["dusk-bls12_381/alloc"]
