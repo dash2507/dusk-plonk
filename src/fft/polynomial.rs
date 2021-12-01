@@ -13,6 +13,7 @@ use crate::util;
 use core::ops::{Add, AddAssign, Deref, DerefMut, Mul, Neg, Sub, SubAssign};
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable};
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 #[derive(Debug, Eq, PartialEq, Clone)]

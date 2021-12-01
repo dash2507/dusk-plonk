@@ -16,6 +16,7 @@ use dusk_bls12_381::BlsScalar;
 use dusk_bytes::{DeserializableSlice, Serializable, Write};
 use dusk_jubjub::{JubJubAffine, JubJubExtended, JubJubScalar};
 use parity_scale_codec::{Decode, Encode};
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 #[derive(Default, Debug, Clone, PartialEq, Decode, Encode)]

@@ -10,6 +10,7 @@ use crate::{
     proof_system::ProverKey,
 };
 use dusk_bls12_381::BlsScalar;
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 /// Computes the Quotient [`Polynomial`] given the [`EvaluationDomain`], a

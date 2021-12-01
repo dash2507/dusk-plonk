@@ -11,6 +11,7 @@ use crate::constraint_system::{
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::Serializable;
 use dusk_jubjub::{JubJubAffine, JubJubExtended, JubJubScalar};
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 fn compute_wnaf_point_multiples(

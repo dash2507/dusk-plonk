@@ -24,6 +24,7 @@ use crate::plonkup::LookupTable;
 use dusk_bls12_381::BlsScalar;
 use hashbrown::HashMap;
 use sp_std::collections::btree_map::BTreeMap;
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 /// The TurboComposer is the circuit-builder tool that the `dusk-plonk`

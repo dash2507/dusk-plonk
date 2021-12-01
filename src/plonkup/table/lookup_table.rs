@@ -11,6 +11,7 @@ use super::hash_tables::constants::{BLS_SCALAR_REAL, DECOMPOSITION_S_I, SBOX};
 use crate::error::Error;
 use crate::plonkup::MultiSet;
 use crate::prelude::BlsScalar;
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 /// This struct is a table, contaning a vector,

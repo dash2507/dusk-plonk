@@ -86,6 +86,7 @@ use crate::error::Error;
 use crate::fft::Evaluations;
 use core::ops::MulAssign;
 use dusk_bls12_381::{GENERATOR, ROOT_OF_UNITY, TWO_ADACITY};
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 impl EvaluationDomain {

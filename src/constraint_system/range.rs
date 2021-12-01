@@ -9,6 +9,7 @@ use crate::constraint_system::TurboComposer;
 use crate::constraint_system::{WireData, Witness};
 use dusk_bls12_381::BlsScalar;
 use dusk_bytes::Serializable;
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 impl TurboComposer {

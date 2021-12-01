@@ -13,6 +13,7 @@ use dusk_bytes::{DeserializableSlice, Serializable};
 use parity_scale_codec::{Decode, Encode};
 use rand_core::{CryptoRng, RngCore};
 use serde::{Deserialize, Serialize};
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 /// The Public Parameters can also be referred to as the Structured Reference

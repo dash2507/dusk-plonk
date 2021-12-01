@@ -193,6 +193,7 @@ use crate::{
 };
 use dusk_bls12_381::BlsScalar;
 use merlin::Transcript;
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 impl VerifierKey {
