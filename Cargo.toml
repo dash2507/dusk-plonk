@@ -20,8 +20,8 @@ exclude = [
 merlin = {version = "3.0", default-features = false}
 rand_core = {version="0.6", default-features=false}
 dusk-bytes = "0.1"
-dusk-bls12_381 = {version = "0.1", default-features = false, features = ["groups", "pairings", "endo"], package="plonk-bls12_381"}
-dusk-jubjub = {version = "0.1", default-features = false, package="plonk-jubjub"}
+dusk-bls12_381 = {version = "0.1", default-features = false, package="plonk-bls12_381", path = "../dusk-bls12_381"}
+dusk-jubjub = {version = "0.1", default-features = false, package="plonk-jubjub", path = "../jubjub"}
 itertools = {version = "0.9", default-features = false}
 hashbrown = {version = "0.9", default-features=false, features = ["ahash"]}
 cfg-if = "1.0"
@@ -32,6 +32,7 @@ canonical_derive = {version = "0.6", optional = true}
 parity-scale-codec = { version = "2.0", default-features = false, features = ["derive"] }
 serde = {version = "1.0", features = ["derive"]}
 sp-std = { default-features = false, version = '3.0.0' }
+getrandom = { version = "0.2", features = ["js"] }
 
 [dev-dependencies]
 criterion = "0.3"
@@ -45,14 +46,12 @@ harness = false
 default = ["std"]
 std = [
     "rand_core/std",
-    "dusk-bls12_381/default",  # Includes `parallel`
-    "dusk-jubjub/default",
     "itertools/default",
     "hashbrown/default"
 ]
 trace = []
 trace-print = ["trace"]
-canon = ["dusk-bls12_381/canon", "dusk-jubjub/canon", "canonical", "canonical_derive"]
+canon = ["dusk-jubjub/canon"]
 
 [profile.release]
 panic = "abort"
