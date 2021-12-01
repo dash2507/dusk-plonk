@@ -150,8 +150,6 @@ use crate::{
 };
 use dusk_bls12_381::{multiscalar_mul::msm_variable_base, BlsScalar, G1Affine};
 use merlin::Transcript;
-#[cfg(feature = "std")]
-use rayon::prelude::*;
 use sp_std::vec::Vec;
 
 impl Proof {
@@ -588,7 +586,7 @@ fn compute_barycentric_eval(
     let range = (0..evaluations.len()).into_iter();
 
     #[cfg(feature = "std")]
-    let range = (0..evaluations.len()).into_par_iter();
+    let range = (0..evaluations.len()).into_iter();
 
     let non_zero_evaluations: Vec<usize> = range
         .filter(|&i| {
@@ -602,7 +600,7 @@ fn compute_barycentric_eval(
     let range = (0..non_zero_evaluations.len()).into_iter();
 
     #[cfg(feature = "std")]
-    let range = (0..non_zero_evaluations.len()).into_par_iter();
+    let range = (0..non_zero_evaluations.len()).into_iter();
 
     let mut denominators: Vec<BlsScalar> = range
         .clone()

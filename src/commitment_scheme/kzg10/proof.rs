@@ -25,8 +25,6 @@ use crate::transcript::TranscriptProtocol;
 use crate::util::powers_of;
 use dusk_bls12_381::G1Projective;
 use merlin::Transcript;
-#[cfg(feature = "std")]
-use rayon::prelude::*;
 use sp_std::vec::Vec;
 
 /// Proof that multiple polynomials were correctly evaluated at a point `z`,
@@ -76,13 +74,11 @@ impl AggregateProof {
             self.evaluated_points.iter().zip(powers.iter());
 
         #[cfg(feature = "std")]
-        let flattened_poly_commitments_iter = self
-            .commitments_to_polynomials
-            .par_iter()
-            .zip(powers.par_iter());
+        let flattened_poly_commitments_iter =
+            self.commitments_to_polynomials.iter().zip(powers.iter());
         #[cfg(feature = "std")]
         let flattened_poly_evaluations_iter =
-            self.evaluated_points.par_iter().zip(powers.par_iter());
+            self.evaluated_points.iter().zip(powers.iter());
 
         // Flattened polynomial commitments using challenge
         let flattened_poly_commitments: G1Projective =

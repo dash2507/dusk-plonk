@@ -86,8 +86,6 @@ use crate::error::Error;
 use crate::fft::Evaluations;
 use core::ops::MulAssign;
 use dusk_bls12_381::{GENERATOR, ROOT_OF_UNITY, TWO_ADACITY};
-#[cfg(feature = "std")]
-use rayon::prelude::*;
 use sp_std::vec::Vec;
 
 impl EvaluationDomain {
@@ -161,7 +159,7 @@ impl EvaluationDomain {
         evals.iter_mut().for_each(|val| *val *= &self.size_inv);
 
         #[cfg(feature = "std")]
-        evals.par_iter_mut().for_each(|val| *val *= &self.size_inv);
+        evals.iter_mut().for_each(|val| *val *= &self.size_inv);
     }
 
     fn distribute_powers(coeffs: &mut [BlsScalar], g: BlsScalar) {
@@ -244,7 +242,7 @@ impl EvaluationDomain {
             });
 
             #[cfg(feature = "std")]
-            u.par_iter_mut().zip(ls).for_each(|(tau_minus_r, l)| {
+            u.iter_mut().zip(ls).for_each(|(tau_minus_r, l)| {
                 *tau_minus_r = l * *tau_minus_r;
             });
 

@@ -10,8 +10,6 @@ use crate::{
     proof_system::ProverKey,
 };
 use dusk_bls12_381::BlsScalar;
-#[cfg(feature = "std")]
-use rayon::prelude::*;
 use sp_std::vec::Vec;
 
 /// Computes the Quotient [`Polynomial`] given the [`EvaluationDomain`], a
@@ -149,7 +147,7 @@ pub(crate) fn compute(
     let range = (0..domain_4n.size()).into_iter();
 
     #[cfg(feature = "std")]
-    let range = (0..domain_4n.size()).into_par_iter();
+    let range = (0..domain_4n.size()).into_iter();
 
     let quotient: Vec<_> = range
         .map(|i| {
@@ -203,7 +201,7 @@ fn compute_circuit_satisfiability_equation(
     let range = (0..domain_4n.size()).into_iter();
 
     #[cfg(feature = "std")]
-    let range = (0..domain_4n.size()).into_par_iter();
+    let range = (0..domain_4n.size()).into_iter();
 
     let t: Vec<_> = range
         .map(|i| {
@@ -320,7 +318,7 @@ fn compute_permutation_checks(
     let range = (0..domain_4n.size()).into_iter();
 
     #[cfg(feature = "std")]
-    let range = (0..domain_4n.size()).into_par_iter();
+    let range = (0..domain_4n.size()).into_iter();
 
     let t: Vec<_> = range
         .map(|i| {
