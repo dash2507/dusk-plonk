@@ -18,21 +18,19 @@ exclude = [
 
 [dependencies]
 merlin = {version = "3.0", default-features = false}
-rand_core = {version="0.6", default-features=false}
-dusk-bytes = "0.1"
+rand_core = {version="0.6", default-features = false, features = ["getrandom"]}
+dusk-bytes = {version="0.1", default-features = false}
 dusk-bls12_381 = {version = "0.1", default-features = false, package="plonk-bls12_381", path = "../dusk-bls12_381"}
 dusk-jubjub = {version = "0.1", default-features = false, package="plonk-jubjub", path = "../jubjub"}
 itertools = {version = "0.9", default-features = false}
-hashbrown = {version = "0.9", default-features=false, features = ["ahash"]}
-cfg-if = "1.0"
+hashbrown = {version = "0.9", default-features = false, features = ["ahash"]}
 # Dusk related deps for WASMI serde
-canonical = {version = "0.6", optional = true}
-canonical_derive = {version = "0.6", optional = true}
+canonical = {version = "0.6", default-features = false, optional = true}
+canonical_derive = {version = "0.6", default-features = false, optional = true}
 # Parity support
 parity-scale-codec = { version = "2.0", default-features = false, features = ["derive"] }
 serde = { version = "1.0.125", default-features = false, features = ["derive"] }
-sp-std = { default-features = false, version = '3.0.0' }
-getrandom = { version = "0.2", features = ["js"] }
+sp-std = { version = '3.0.0', default-features = false }
 
 [dev-dependencies]
 criterion = "0.3"
@@ -41,17 +39,6 @@ tempdir = "0.3"
 [[bench]]
 name = "plonk"
 harness = false
-
-[features]
-default = ["std"]
-std = [
-    "rand_core/std",
-    "itertools/default",
-    "hashbrown/default"
-]
-trace = []
-trace-print = ["trace"]
-canon = ["dusk-jubjub/canon"]
 
 [profile.release]
 panic = "abort"

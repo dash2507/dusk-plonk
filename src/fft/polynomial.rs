@@ -394,7 +394,6 @@ impl<'a, 'b> Sub<&'a BlsScalar> for &'b Polynomial {
     }
 }
 
-#[cfg(feature = "std")]
 #[cfg(test)]
 mod test {
     use super::*;

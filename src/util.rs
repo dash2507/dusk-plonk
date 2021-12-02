@@ -89,6 +89,8 @@ pub fn batch_inversion(v: &mut [BlsScalar]) {
 #[cfg(test)]
 mod test {
     use super::*;
+    use sp_std::vec;
+
     #[test]
     fn test_batch_inversion() {
         let one = BlsScalar::from(1);

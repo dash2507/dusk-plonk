@@ -76,40 +76,40 @@ impl Circuit for TestCircuit {
 fn test_full() -> Result<()> {
     use tempdir::TempDir;
 
-    let tmp = TempDir::new("plonk-keys-test-full")?.into_path();
+    let tmp = TempDir::new("plonk-keys-test-full").unwrap().into_path();
     let pp_path = tmp.join("pp_testcirc");
     let pk_path = tmp.join("pk_testcirc");
     let vd_path = tmp.join("vd_testcirc");
 
     // Generate CRS
-    let pp_p = PublicParameters::setup(1 << 12, &mut OsRng)?;
-    fs::write(&pp_path, &pp_p.to_raw_var_bytes())?;
+    let pp_p = PublicParameters::setup(1 << 12, &mut OsRng).unwrap();
+    fs::write(&pp_path, &pp_p.to_raw_var_bytes()).unwrap();
 
     // Read PublicParameters
-    let pp = fs::read(pp_path)?;
+    let pp = fs::read(pp_path).unwrap();
     let pp = unsafe { PublicParameters::from_slice_unchecked(&pp) };
 
     // Initialize the circuit
     let mut circuit = TestCircuit::default();
 
     // Compile the circuit
-    let (pk_p, vd_p) = circuit.compile(&pp)?;
+    let (pk_p, vd_p) = circuit.compile(&pp).unwrap();
 
     // Write the keys
-    fs::write(&pk_path, &pk_p.to_var_bytes())?;
+    fs::write(&pk_path, &pk_p.to_var_bytes()).unwrap();
 
     // Read ProverKey
-    let pk = fs::read(pk_path)?;
-    let pk = ProverKey::from_slice(&pk)?;
+    let pk = fs::read(pk_path).unwrap();
+    let pk = ProverKey::from_slice(&pk).unwrap();
 
     assert_eq!(pk, pk_p);
 
     // Store the VerifierData just for the verifier side:
     // (You could also store public_inputs_indexes and VerifierKey
     // sepparatedly).
-    fs::write(&vd_path, &vd_p.to_var_bytes())?;
-    let vd = fs::read(vd_path)?;
-    let vd = VerifierData::from_slice(&vd)?;
+    fs::write(&vd_path, &vd_p.to_var_bytes()).unwrap();
+    let vd = fs::read(vd_path).unwrap();
+    let vd = VerifierData::from_slice(&vd).unwrap();
 
     assert_eq!(vd_p.key(), vd.key());
     assert_eq!(vd_p.public_inputs_indexes(), vd.public_inputs_indexes());
@@ -128,7 +128,8 @@ fn test_full() -> Result<()> {
         };
 
         circuit.prove(&pp, &pk, b"Test")
-    }?;
+    }
+    .unwrap();
 
     // Verifier POV
     let public_inputs: Vec<PublicInputValue> = vec![
@@ -140,11 +141,5 @@ fn test_full() -> Result<()> {
         .into(),
     ];
 
-    Ok(TestCircuit::verify(
-        &pp,
-        &vd,
-        &proof,
-        &public_inputs,
-        b"Test",
-    )?)
+    Ok(TestCircuit::verify(&pp, &vd, &proof, &public_inputs, b"Test").unwrap())
 }
