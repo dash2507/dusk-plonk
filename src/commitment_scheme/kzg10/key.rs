@@ -18,7 +18,8 @@ use dusk_bls12_381::{
 use dusk_bytes::{DeserializableSlice, Serializable};
 use merlin::Transcript;
 use parity_scale_codec::{Decode, Encode};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use sp_std::vec;
 use sp_std::vec::Vec;
 
 /// CommitKey is used to commit to a polynomial which is bounded by the
@@ -27,7 +28,33 @@ use sp_std::vec::Vec;
 pub struct CommitKey {
     /// Group elements of the form `{ \beta^i G }`, where `i` ranges from 0 to
     /// `degree`.
+    #[serde(
+        serialize_with = "serialize_powers_of_g",
+        deserialize_with = "deserialize_powers_of_g"
+    )]
     pub(crate) powers_of_g: Vec<G1Affine>,
+}
+
+fn serialize_powers_of_g<S>(
+    powers_of_g: &Vec<G1Affine>,
+    se: S,
+) -> Result<S::Ok, S::Error>
+where
+    S: Serializer,
+{
+    use serde::ser::SerializeSeq;
+    let mut seq = se.serialize_seq(Some(powers_of_g.len()))?;
+    for coeff in powers_of_g {
+        seq.serialize_element(coeff)?;
+    }
+    seq.end()
+}
+
+fn deserialize_powers_of_g<'de, D>(de: D) -> Result<Vec<G1Affine>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    Ok(vec![])
 }
 
 impl CommitKey {
