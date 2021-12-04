@@ -18,7 +18,7 @@ exclude = [
 
 [dependencies]
 merlin = {version = "3.0", default-features = false}
-rand_core = {version="0.6", default-features = false}
+rand_core = {version="0.6", default-features = false, package="rand_core", path="../rand/rand_core"}
 dusk-bytes = {version="0.1", default-features = false}
 dusk-bls12_381 = {version = "0.1", default-features = false, package="plonk-bls12_381", path = "../dusk-bls12_381"}
 dusk-jubjub = {version = "0.1", default-features = false, package="plonk-jubjub", path = "../jubjub"}
