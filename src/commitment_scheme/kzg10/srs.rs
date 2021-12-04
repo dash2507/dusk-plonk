@@ -11,7 +11,7 @@ use crate::{error::Error, util};
 use dusk_bls12_381::{G1Affine, G1Projective, G2Affine};
 use dusk_bytes::{DeserializableSlice, Serializable};
 use parity_scale_codec::{Decode, Encode};
-use rand_core::{CryptoRng, RngCore};
+use rand_core::RngCore;
 use serde::{Deserialize, Serialize};
 use sp_std::vec;
 use sp_std::vec::Vec;
@@ -46,9 +46,9 @@ impl PublicParameters {
     /// In reality, a `Trusted party` or a `Multiparty Computation` will be used
     /// to generate the SRS. Returns an error if the configured degree is less
     /// than one.
-    pub fn setup<R: RngCore + CryptoRng>(
+    pub fn setup(
         max_degree: usize,
-        mut rng: &mut R,
+        mut rng: impl RngCore,
     ) -> Result<PublicParameters, Error> {
         // Cannot commit to constants
         if max_degree < 1 {

@@ -5,7 +5,6 @@
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
 use parity_plonk::prelude::*;
-use rand_core::OsRng;
 use std::fs;
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
@@ -74,15 +73,20 @@ impl Circuit for TestCircuit {
 
 #[test]
 fn test_full() -> Result<()> {
+    use rand::SeedableRng;
+    use rand_xorshift::XorShiftRng;
     use tempdir::TempDir;
 
     let tmp = TempDir::new("plonk-keys-test-full").unwrap().into_path();
     let pp_path = tmp.join("pp_testcirc");
     let pk_path = tmp.join("pk_testcirc");
     let vd_path = tmp.join("vd_testcirc");
-
+    let rng = XorShiftRng::from_seed([
+        0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32,
+        0x54, 0x06, 0xbc, 0xe5,
+    ]);
     // Generate CRS
-    let pp_p = PublicParameters::setup(1 << 12, &mut OsRng).unwrap();
+    let pp_p = PublicParameters::setup(1 << 12, rng).unwrap();
     fs::write(&pp_path, &pp_p.to_raw_var_bytes()).unwrap();
 
     // Read PublicParameters

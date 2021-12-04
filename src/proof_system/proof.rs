@@ -630,10 +630,16 @@ fn compute_barycentric_eval(
 mod proof_tests {
     use super::*;
     use dusk_bls12_381::BlsScalar;
-    use rand_core::OsRng;
+    use rand::SeedableRng;
+    use rand_xorshift::XorShiftRng;
 
     #[test]
     fn test_dusk_bytes_serde_proof() {
+        // Initialize the polynomial commitment parameters
+        let rng = XorShiftRng::from_seed([
+            0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37,
+            0x32, 0x54, 0x06, 0xbc, 0xe5,
+        ]);
         let proof = Proof {
             a_comm: Commitment::default(),
             b_comm: Commitment::default(),
@@ -651,30 +657,30 @@ mod proof_tests {
             w_z_comm: Commitment::default(),
             w_zw_comm: Commitment::default(),
             evaluations: ProofEvaluations {
-                a_eval: BlsScalar::random(&mut OsRng),
-                b_eval: BlsScalar::random(&mut OsRng),
-                c_eval: BlsScalar::random(&mut OsRng),
-                d_eval: BlsScalar::random(&mut OsRng),
-                a_next_eval: BlsScalar::random(&mut OsRng),
-                b_next_eval: BlsScalar::random(&mut OsRng),
-                d_next_eval: BlsScalar::random(&mut OsRng),
-                q_arith_eval: BlsScalar::random(&mut OsRng),
-                q_c_eval: BlsScalar::random(&mut OsRng),
-                q_l_eval: BlsScalar::random(&mut OsRng),
-                q_r_eval: BlsScalar::random(&mut OsRng),
-                q_lookup_eval: BlsScalar::random(&mut OsRng),
-                left_sigma_eval: BlsScalar::random(&mut OsRng),
-                right_sigma_eval: BlsScalar::random(&mut OsRng),
-                out_sigma_eval: BlsScalar::random(&mut OsRng),
-                lin_poly_eval: BlsScalar::random(&mut OsRng),
-                perm_eval: BlsScalar::random(&mut OsRng),
-                lookup_perm_eval: BlsScalar::random(&mut OsRng),
-                h_1_eval: BlsScalar::random(&mut OsRng),
-                h_1_next_eval: BlsScalar::random(&mut OsRng),
-                h_2_eval: BlsScalar::random(&mut OsRng),
-                f_eval: BlsScalar::random(&mut OsRng),
-                table_eval: BlsScalar::random(&mut OsRng),
-                table_next_eval: BlsScalar::random(&mut OsRng),
+                a_eval: BlsScalar::random(rng.clone()),
+                b_eval: BlsScalar::random(rng.clone()),
+                c_eval: BlsScalar::random(rng.clone()),
+                d_eval: BlsScalar::random(rng.clone()),
+                a_next_eval: BlsScalar::random(rng.clone()),
+                b_next_eval: BlsScalar::random(rng.clone()),
+                d_next_eval: BlsScalar::random(rng.clone()),
+                q_arith_eval: BlsScalar::random(rng.clone()),
+                q_c_eval: BlsScalar::random(rng.clone()),
+                q_l_eval: BlsScalar::random(rng.clone()),
+                q_r_eval: BlsScalar::random(rng.clone()),
+                q_lookup_eval: BlsScalar::random(rng.clone()),
+                left_sigma_eval: BlsScalar::random(rng.clone()),
+                right_sigma_eval: BlsScalar::random(rng.clone()),
+                out_sigma_eval: BlsScalar::random(rng.clone()),
+                lin_poly_eval: BlsScalar::random(rng.clone()),
+                perm_eval: BlsScalar::random(rng.clone()),
+                lookup_perm_eval: BlsScalar::random(rng.clone()),
+                h_1_eval: BlsScalar::random(rng.clone()),
+                h_1_next_eval: BlsScalar::random(rng.clone()),
+                h_2_eval: BlsScalar::random(rng.clone()),
+                f_eval: BlsScalar::random(rng.clone()),
+                table_eval: BlsScalar::random(rng.clone()),
+                table_next_eval: BlsScalar::random(rng.clone()),
             },
         };
 

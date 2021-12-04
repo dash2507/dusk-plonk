@@ -7,7 +7,7 @@
 use dusk_bls12_381::{
     BlsScalar, G1Affine, G1Projective, G2Affine, G2Projective,
 };
-use rand_core::{CryptoRng, RngCore};
+use rand_core::RngCore;
 use sp_std::vec::Vec;
 
 /// Returns a vector of BlsScalars of increasing powers of x from x^0 to x^d.
@@ -24,20 +24,16 @@ pub(crate) fn powers_of(
 }
 
 /// Generates a random BlsScalar using a RNG seed.
-pub(crate) fn random_scalar<R: RngCore + CryptoRng>(rng: &mut R) -> BlsScalar {
+pub(crate) fn random_scalar(rng: impl RngCore) -> BlsScalar {
     BlsScalar::random(rng)
 }
 
 /// Generates a random G1 Point using an RNG seed.
-pub(crate) fn random_g1_point<R: RngCore + CryptoRng>(
-    rng: &mut R,
-) -> G1Projective {
+pub(crate) fn random_g1_point(rng: impl RngCore) -> G1Projective {
     G1Affine::generator() * random_scalar(rng)
 }
 /// Generates a random G2 point using an RNG seed.
-pub(crate) fn random_g2_point<R: RngCore + CryptoRng>(
-    rng: &mut R,
-) -> G2Projective {
+pub(crate) fn random_g2_point(rng: impl RngCore) -> G2Projective {
     G2Affine::generator() * random_scalar(rng)
 }
 

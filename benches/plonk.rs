@@ -7,7 +7,9 @@
 #![allow(clippy::many_single_char_names)]
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use dusk_plonk::prelude::*;
+use parity_plonk::prelude::*;
+use rand::SeedableRng;
+use rand_xorshift::XorShiftRng;
 
 #[derive(Debug, Clone, Copy)]
 struct BenchCircuit {
@@ -33,7 +35,7 @@ impl Circuit for BenchCircuit {
         let mut b = BlsScalar::from(3u64);
         let mut c;
 
-        while composer.gates() < self.padded_gates() {
+        while composer.gates() < self.padded_gates() as u32 {
             a += BlsScalar::one();
             b += BlsScalar::one();
             c = a * b + a + b + BlsScalar::one();
@@ -82,7 +84,10 @@ fn constraint_system_benchmark(c: &mut Criterion) {
     let initial_degree = 5;
     let final_degree = 18;
 
-    let rng = &mut rand_core::OsRng;
+    let rng = XorShiftRng::from_seed([
+        0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32,
+        0x54, 0x06, 0xbc, 0xe5,
+    ]);
     let label = b"dusk-network";
     let pp = PublicParameters::setup(1 << (final_degree - 1), rng)
         .expect("Failed to create PP");

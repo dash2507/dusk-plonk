@@ -1,4 +1,4 @@
-# PLONK 
+# PLONK
 ![Build Status](https://github.com/dusk-network/plonk/workflows/Continuous%20integration/badge.svg)
 [![Repository](https://img.shields.io/badge/github-plonk-blueviolet?logo=github)](https://github.com/dusk-network/plonk)
 [![Documentation](https://img.shields.io/badge/docs-plonk-blue?logo=rust)](https://docs.rs/plonk/)
@@ -11,8 +11,10 @@ This library contains a modularised implementation of KZG10 as the default polyn
 ## Usage
 
 ```rust
-use dusk_plonk::prelude::*;
-use rand_core::OsRng;
+use parity_plonk::prelude::*;
+use rand::SeedableRng;
+use rand_xorshift::XorShiftRng;
+use rand_core::RngCore;
 
 // Implement a circuit that checks:
 // 1) a + b = c where C is a PI
@@ -82,7 +84,11 @@ impl Circuit for TestCircuit {
 
 // Now let's use the Circuit we've just implemented!
 
-let pp = PublicParameters::setup(1 << 12, &mut OsRng).unwrap();
+let rng = XorShiftRng::from_seed([
+    0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37,
+    0x32, 0x54, 0x06, 0xbc, 0xe5,
+]);
+let pp = PublicParameters::setup(1 << 12, rng).unwrap();
 // Initialize the circuit
 let mut circuit = TestCircuit::default();
 // Compile the circuit

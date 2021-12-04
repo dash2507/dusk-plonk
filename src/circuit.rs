@@ -127,8 +127,9 @@ impl VerifierData {
 /// # Example
 ///
 /// ```
-/// use dusk_plonk::prelude::*;
-/// use rand_core::OsRng;
+/// use parity_plonk::prelude::*;
+/// use rand::SeedableRng;
+/// use rand_xorshift::XorShiftRng;
 ///
 /// fn main() -> Result<(), Error> {
 /// // Implements a circuit that checks:
@@ -202,7 +203,12 @@ impl VerifierData {
 ///     }
 /// }
 ///
-/// let pp = PublicParameters::setup(1 << 12, &mut OsRng)?;
+/// let rng = XorShiftRng::from_seed([
+/// 0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37,
+/// 0x32, 0x54, 0x06, 0xbc, 0xe5,
+/// ]);
+///
+/// let pp = PublicParameters::setup(1 << 12, rng)?;
 /// // Initialize the circuit
 /// let mut circuit = TestCircuit::default();
 /// // Compile the circuit
