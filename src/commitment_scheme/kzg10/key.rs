@@ -54,7 +54,8 @@ fn deserialize_powers_of_g<'de, D>(de: D) -> Result<Vec<G1Affine>, D::Error>
 where
     D: Deserializer<'de>,
 {
-    Ok(vec![])
+    let s = Deserialize::deserialize(de).unwrap();
+    Ok(vec![s])
 }
 
 impl CommitKey {

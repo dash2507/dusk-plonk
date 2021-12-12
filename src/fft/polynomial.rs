@@ -397,25 +397,6 @@ impl<'a, 'b> Sub<&'a BlsScalar> for &'b Polynomial {
 #[cfg(test)]
 mod test {
     use super::*;
-    use rand_core::{CryptoRng, RngCore};
-
-    impl Polynomial {
-        /// Outputs a polynomial of degree `d` where each coefficient is sampled
-        /// uniformly at random from the field `F`.
-        /// This is only implemented for test purposes for now but inside of a
-        /// `impl` block since it's used across multiple files in the
-        /// repo.
-        pub(crate) fn rand<R: RngCore + CryptoRng>(
-            d: usize,
-            mut rng: &mut R,
-        ) -> Self {
-            let mut random_coeffs = Vec::with_capacity(d + 1);
-            for _ in 0..=d {
-                random_coeffs.push(util::random_scalar(&mut rng));
-            }
-            Self::from_coefficients_vec(random_coeffs)
-        }
-    }
 
     #[test]
     fn test_ruffini() {
