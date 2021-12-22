@@ -11,7 +11,7 @@ This library contains a modularised implementation of KZG10 as the default polyn
 ## Usage
 
 ```rust
-use parity_plonk::prelude::*;
+use fullcodec_plonk::prelude::*;
 use rand::SeedableRng;
 use rand_xorshift::XorShiftRng;
 use rand_core::RngCore;

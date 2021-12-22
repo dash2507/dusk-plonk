@@ -1,5 +1,5 @@
 [package]
-name = "parity-plonk"
+name = "fullcodec-plonk"
 version = "0.2.0"
 categories =["algorithms", "cryptography", "science"]
 edition = "2018"
@@ -20,8 +20,8 @@ exclude = [
 merlin = {version = "3.0", default-features = false}
 rand_core = {version="0.6", default-features = false}
 dusk-bytes = {version="0.1", default-features = false}
-dusk-bls12_381 = {version = "0.2", default-features = false, package="plonk-bls12_381"}
-dusk-jubjub = {version = "0.2", default-features = false, package="plonk-jubjub"}
+dusk-bls12_381 = {version = "0.2", default-features = false, package="fullcodec-bls12_381"}
+dusk-jubjub = {version = "0.2", default-features = false, package="fullcodec-jubjub"}
 itertools = {version = "0.9", default-features = false}
 hashbrown = {version = "0.9", default-features = false, features = ["ahash"]}
 # Dusk related deps for WASMI serde
@@ -35,7 +35,7 @@ sp-std = { version = '3.0.0', default-features = false }
 [dev-dependencies]
 criterion = "0.3"
 tempdir = "0.3"
-rand_xorshift = {version = "0.1", default-features = false, package = "parity_rand_xorshift"}
+rand_xorshift = {version = "0.2", default-features = false, package = "fullcodec_rand_xorshift"}
 rand = {version = "0.8", default-features = false}
 
 [[bench]]
