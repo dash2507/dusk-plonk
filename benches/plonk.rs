@@ -7,7 +7,7 @@
 #![allow(clippy::many_single_char_names)]
 
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use fullcodec_plonk::prelude::*;
+use dusk_plonk::prelude::*;
 use rand::SeedableRng;
 use rand_xorshift::XorShiftRng;
 

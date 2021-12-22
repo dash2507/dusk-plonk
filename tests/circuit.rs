@@ -4,7 +4,7 @@
 //
 // Copyright (c) DUSK NETWORK. All rights reserved.
 
-use fullcodec_plonk::prelude::*;
+use dusk_plonk::prelude::*;
 use std::fs;
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;

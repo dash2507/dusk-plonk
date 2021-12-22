@@ -127,7 +127,7 @@ impl VerifierData {
 /// # Example
 ///
 /// ```
-/// use fullcodec_plonk::prelude::*;
+/// use dusk_plonk::prelude::*;
 /// use rand::SeedableRng;
 /// use rand_xorshift::XorShiftRng;
 ///
